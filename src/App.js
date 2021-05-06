@@ -25,9 +25,10 @@ class App extends React.Component {
     event.preventDefault();
     this.setState({ newTask: { task: event.target.value, id: '', completed: false } });
   }
+
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({})
+
   }
   render() {
     return (

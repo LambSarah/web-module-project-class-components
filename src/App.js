@@ -6,7 +6,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleToggleCompleted = this.handleToggleCompleted.bind(this);
+    this.toggleCompleted = this.toggleCompleted.bind(this);
     this.state = {
       idCounter: 1001,
       todos: [{
@@ -23,14 +23,17 @@ class App extends React.Component {
     this.setState({ newtask: event.target.value });
   }
 
-  handleToggleCompleted = (event, completed) => {
-    event.persist();
-    let listItem = { ...this.state.todos[event.target] };
-    console.log(listItem)
-    listItem = !listItem;
-    this.setState(...this.state.todos, listItem);
-
+  toggleCompleted = itemId => {
+    this.setState({
+      todos: this.state.todos.map(item => {
+        if (itemId === item.id) {
+          return { ...item, completed: !item.completed }
+        }
+        return item;
+      })
+    });
   }
+
 
   handleSubmit = event => {
     event.preventDefault();
@@ -56,7 +59,7 @@ class App extends React.Component {
         idcounter: <pre>{JSON.stringify(this.state.idCounter)}</pre>
         todos:<pre>{JSON.stringify(this.state.todos)}</pre>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList todos={this.state.todos} handleToggleCompleted={this.handleToggleCompleted} />
+        <TodoList todos={this.state.todos} toggleCompleted={this.toggleCompleted} />
         <TodoForm updateNewTask={this.updateNewTask} handleSubmit={this.handleSubmit} />
       </div>
     );

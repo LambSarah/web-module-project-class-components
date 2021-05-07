@@ -2,6 +2,7 @@
 // feel free to change this component.js into TodoList.js
 import React from 'react';
 import Todo from './Todo.js'
+import './Todo.css'
 
 class TodoList extends React.Component {
     render() {
@@ -9,16 +10,15 @@ class TodoList extends React.Component {
             <div className='todoList'>
                 <ul>
                     {this.props.todos.map((todo) => (
-
-
-                        <Todo
-                            handleItemToggle={this.props.handleToggleCompleted}
-                            key={todo.index}
-                            id={todo.id}
-                            task={todo.task}
-                            completed={todo.completed}
-                            className={(this.props.completed === true) ? 'strikethrough todoItem' : 'todoItem'} />
-
+                        <li onClick={() => this.props.toggleCompleted(todo.id)}>
+                            <Todo
+                                handleItemToggle={this.props.handleToggleCompleted}
+                                key={todo.index}
+                                id={todo.id}
+                                task={todo.task}
+                                completed={todo.completed}
+                            />
+                        </li>
                     ))}
                 </ul></div >
         )

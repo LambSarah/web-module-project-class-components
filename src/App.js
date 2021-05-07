@@ -6,6 +6,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleToggleCompleted = this.handleToggleCompleted.bind(this);
     this.state = {
       idCounter: 1001,
       todos: [{
@@ -22,12 +23,13 @@ class App extends React.Component {
     this.setState({ newtask: event.target.value });
   }
 
-  handleToggleCompleted = event => {
-    let todos = [...this.state.todos];
-    let todo = { ...todos[1] };
-    todo.completed = !this.state.todos[1].completed;
-    todos[1] = todo;
-    this.setState({ todos })
+  handleToggleCompleted = (event, completed) => {
+    event.persist();
+    let listItem = { ...this.state.todos[event.target] };
+    console.log(listItem)
+    listItem = !listItem;
+    this.setState(...this.state.todos, listItem);
+
   }
 
   handleSubmit = event => {
@@ -50,7 +52,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        State:<pre>{JSON.stringify(this.state)}</pre>
+        All State: <pre>{JSON.stringify(this.state)}</pre>
+        idcounter: <pre>{JSON.stringify(this.state.idCounter)}</pre>
         todos:<pre>{JSON.stringify(this.state.todos)}</pre>
         <h2>Welcome to your Todo App!</h2>
         <TodoList todos={this.state.todos} handleToggleCompleted={this.handleToggleCompleted} />

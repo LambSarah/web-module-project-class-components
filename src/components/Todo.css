@@ -1,0 +1,7 @@
+.todoItem{
+    text-decoration-line:'none';
+}
+
+.todoItem.strikethrough{
+    text-decoration-line:line-through;
+}

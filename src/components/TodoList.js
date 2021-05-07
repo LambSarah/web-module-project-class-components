@@ -9,10 +9,18 @@ class TodoList extends React.Component {
             <div className='todoList'>
                 <ul>
                     {this.props.todos.map((todo) => (
-                        <li><Todo key={todo.id} id={todo.id} task={todo.task} completed={todo.completed} /></li>
+
+
+                        <Todo
+                            handleItemToggle={this.props.handleToggleCompleted}
+                            key={todo.index}
+                            id={todo.id}
+                            task={todo.task}
+                            completed={todo.completed}
+                            className={(this.props.completed === true) ? 'strikethrough todoItem' : 'todoItem'} />
+
                     ))}
-                </ul>
-            </div>
+                </ul></div >
         )
     }
 }
